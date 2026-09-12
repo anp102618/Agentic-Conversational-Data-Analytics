@@ -1,0 +1,27 @@
+scikit-learn
+scikit-optimize
+matplotlib
+python-box
+pyYAML
+tqdm
+pydantic
+pydantic-settings
+ensure
+joblib
+types-PyYAML
+fastapi
+uvicorn
+xgboost
+seaborn
+streamlit
+docker
+statsmodels
+numpy
+pandas
+imblearn
+google-genai
+groq
+openai
+streamlit
+redis
+-e .

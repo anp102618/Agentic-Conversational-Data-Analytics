@@ -1,0 +1,324 @@
+{
+  "dataset": {
+    "rows": 13320,
+    "columns": 9,
+    "cells": 119880
+  },
+  "columns": [
+    {
+      "column": "area_type",
+      "physical_dtype": "object",
+      "row_count": 13320,
+      "non_null_count": 13320,
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "unique_count": 4,
+      "semantic_type": "categorical",
+      "confidence": 1.0
+    },
+    {
+      "column": "availability",
+      "physical_dtype": "object",
+      "row_count": 13320,
+      "non_null_count": 13320,
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "unique_count": 81,
+      "semantic_type": "categorical",
+      "confidence": 1.0
+    },
+    {
+      "column": "location",
+      "physical_dtype": "object",
+      "row_count": 13320,
+      "non_null_count": 13319,
+      "missing_count": 1,
+      "missing_percentage": 0.01,
+      "unique_count": 1305,
+      "semantic_type": "string",
+      "confidence": 1.0
+    },
+    {
+      "column": "size",
+      "physical_dtype": "object",
+      "row_count": 13320,
+      "non_null_count": 13304,
+      "missing_count": 16,
+      "missing_percentage": 0.12,
+      "unique_count": 31,
+      "semantic_type": "categorical",
+      "confidence": 1.0
+    },
+    {
+      "column": "society",
+      "physical_dtype": "object",
+      "row_count": 13320,
+      "non_null_count": 7818,
+      "missing_count": 5502,
+      "missing_percentage": 41.31,
+      "unique_count": 2688,
+      "semantic_type": "string",
+      "confidence": 1.0
+    },
+    {
+      "column": "total_sqft",
+      "physical_dtype": "object",
+      "row_count": 13320,
+      "non_null_count": 13320,
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "unique_count": 2117,
+      "semantic_type": "numeric_string",
+      "confidence": 1.0
+    },
+    {
+      "column": "bath",
+      "physical_dtype": "float64",
+      "row_count": 13320,
+      "non_null_count": 13247,
+      "missing_count": 73,
+      "missing_percentage": 0.55,
+      "unique_count": 19,
+      "semantic_type": "numeric",
+      "confidence": 1.0
+    },
+    {
+      "column": "balcony",
+      "physical_dtype": "float64",
+      "row_count": 13320,
+      "non_null_count": 12711,
+      "missing_count": 609,
+      "missing_percentage": 4.57,
+      "unique_count": 4,
+      "semantic_type": "numeric",
+      "confidence": 1.0
+    },
+    {
+      "column": "price",
+      "physical_dtype": "float64",
+      "row_count": 13320,
+      "non_null_count": 13320,
+      "missing_count": 0,
+      "missing_percentage": 0.0,
+      "unique_count": 1994,
+      "semantic_type": "numeric",
+      "confidence": 1.0
+    }
+  ],
+  "anomalies": [
+    {
+      "scope": "dataset",
+      "anomaly_type": "duplicate_rows",
+      "description": "529 duplicate rows detected.",
+      "severity": "high"
+    },
+    {
+      "scope": "location",
+      "anomaly_type": "missing_values",
+      "description": "Missing values detected in this column.",
+      "severity": "medium"
+    },
+    {
+      "scope": "size",
+      "anomaly_type": "missing_values",
+      "description": "Missing values detected in this column.",
+      "severity": "medium"
+    },
+    {
+      "scope": "society",
+      "anomaly_type": "missing_values",
+      "description": "Missing values detected in this column.",
+      "severity": "medium"
+    },
+    {
+      "scope": "total_sqft",
+      "anomaly_type": "invalid_values",
+      "description": "Values failed deterministic validation or normalization checks.",
+      "severity": "high"
+    },
+    {
+      "scope": "bath",
+      "anomaly_type": "missing_values",
+      "description": "Missing values detected in this column.",
+      "severity": "medium"
+    },
+    {
+      "scope": "bath",
+      "anomaly_type": "outliers",
+      "description": "Statistical outliers detected using the IQR method.",
+      "severity": "medium"
+    },
+    {
+      "scope": "balcony",
+      "anomaly_type": "missing_values",
+      "description": "Missing values detected in this column.",
+      "severity": "medium"
+    },
+    {
+      "scope": "price",
+      "anomaly_type": "outliers",
+      "description": "Statistical outliers detected using the IQR method.",
+      "severity": "medium"
+    }
+  ],
+  "relationships": [
+    {
+      "relationship": "numeric_columns",
+      "details": "Multiple numeric columns are available for correlation and business-rule analysis."
+    }
+  ],
+  "cleaning_plan": {
+    "steps": [
+      {
+        "column": null,
+        "action": "remove_duplicates",
+        "reason": "529 duplicate rows were detected."
+      },
+      {
+        "column": "area_type",
+        "action": "defer",
+        "reason": "replace multiple spaces with a single space"
+      },
+      {
+        "column": "area_type",
+        "action": "standardize",
+        "reason": "trim any leading or trailing spaces"
+      },
+      {
+        "column": "area_type",
+        "action": "standardize",
+        "reason": "standardize category naming (e.g., unify 'Super built-up Area' format)"
+      },
+      {
+        "column": "availability",
+        "action": "decompose",
+        "reason": "Column mixes availability status (e.g., 'Ready To Move') with date strings (e.g., '18-Dec'), representing two independent concepts Suggested columns: availability_status, availability_date"
+      },
+      {
+        "column": "availability",
+        "action": "decompose",
+        "reason": "Split into status and date columns"
+      },
+      {
+        "column": "availability",
+        "action": "convert_type",
+        "reason": "Standardize date strings to full ISO format and cast to datetime"
+      },
+      {
+        "column": "availability",
+        "action": "validate",
+        "reason": "Validate status values against allowed list (e.g., Ready To Move)"
+      },
+      {
+        "column": "location",
+        "action": "standardize",
+        "reason": "trim leading and trailing whitespace"
+      },
+      {
+        "column": "location",
+        "action": "defer",
+        "reason": "replace multiple consecutive spaces with a single space"
+      },
+      {
+        "column": "location",
+        "action": "defer",
+        "reason": "impute or remove the single missing value"
+      },
+      {
+        "column": "size",
+        "action": "defer",
+        "reason": "impute or flag missing values (e.g., using mode or a separate category)"
+      },
+      {
+        "column": "size",
+        "action": "convert_type",
+        "reason": "standardize category labels to a consistent format (e.g., convert all to \"BHK\" or \"Bedroom\")"
+      },
+      {
+        "column": "size",
+        "action": "defer",
+        "reason": "encode the cleaned categorical variable appropriately for downstream models (e.g., one‑hot or ordinal encoding)"
+      },
+      {
+        "column": "society",
+        "action": "defer",
+        "reason": "impute or drop rows with missing values"
+      },
+      {
+        "column": "society",
+        "action": "standardize",
+        "reason": "normalize whitespace by collapsing multiple spaces and trimming"
+      },
+      {
+        "column": "society",
+        "action": "review",
+        "reason": "review and possibly group low‑frequency society names"
+      },
+      {
+        "column": "total_sqft",
+        "action": "standardize",
+        "reason": "standardize values by extracting numeric part and handling ranges (e.g., replace \"2100 - 2850\" with its midpoint or bounds)"
+      },
+      {
+        "column": "total_sqft",
+        "action": "convert_type",
+        "reason": "remove non‑numeric characters and units (e.g., \"Sq. Meter\") and convert the column to a numeric dtype"
+      },
+      {
+        "column": "total_sqft",
+        "action": "investigate",
+        "reason": "investigate entries with ambiguous formats to decide on a consistent representation"
+      },
+      {
+        "column": "bath",
+        "action": "defer",
+        "reason": "impute missing values using median"
+      },
+      {
+        "column": "bath",
+        "action": "defer",
+        "reason": "cap outliers to bounds (0.5-4.5)"
+      },
+      {
+        "column": "bath",
+        "action": "review",
+        "reason": "consider binning or log-transform to reduce skew"
+      },
+      {
+        "column": "balcony",
+        "action": "defer",
+        "reason": "impute missing values using median or mode"
+      },
+      {
+        "column": "balcony",
+        "action": "convert_type",
+        "reason": "convert column to integer dtype"
+      },
+      {
+        "column": "balcony",
+        "action": "defer",
+        "reason": "evaluate column relevance before modeling"
+      },
+      {
+        "column": "price",
+        "action": "investigate",
+        "reason": "investigate outlier records"
+      },
+      {
+        "column": "price",
+        "action": "defer",
+        "reason": "apply winsorization or clipping at the upper bound (225)"
+      },
+      {
+        "column": "price",
+        "action": "review",
+        "reason": "consider log transformation to reduce skew"
+      }
+    ]
+  },
+  "readiness": {
+    "score": 45.0,
+    "status": "not_ready",
+    "summary": "Detected 9 deterministic data-quality observations."
+  }
+}

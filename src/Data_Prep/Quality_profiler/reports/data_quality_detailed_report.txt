@@ -1,0 +1,934 @@
+====================================================================================================
+DATA QUALITY DETAILED REPORT
+====================================================================================================
+
+1. DATASET OVERVIEW
+----------------------------------------------------------------------------------------------------
+Rows             : 13320
+Columns          : 9
+Cells            : 119880
+Readiness Score  : 45.0
+Readiness Status : not_ready
+Readiness Summary: Detected 9 deterministic data-quality observations.
+
+2. DETERMINISTIC COLUMN CONSOLIDATION
+----------------------------------------------------------------------------------------------------
+
+Column: area_type
+  Physical dtype    : object
+  Semantic type     : categorical
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13320
+  Missing           : 0
+  Missing %         : 0.0
+  Missing severity  : none
+  Unique values     : 4
+  Anomalies         : 0
+  Cleaning actions  : 3
+
+Column: availability
+  Physical dtype    : object
+  Semantic type     : categorical
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13320
+  Missing           : 0
+  Missing %         : 0.0
+  Missing severity  : none
+  Unique values     : 81
+  Anomalies         : 0
+  Cleaning actions  : 4
+
+Column: location
+  Physical dtype    : object
+  Semantic type     : string
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13319
+  Missing           : 1
+  Missing %         : 0.01
+  Missing severity  : low
+  Unique values     : 1305
+  Anomalies         : 1
+  Cleaning actions  : 3
+
+Column: size
+  Physical dtype    : object
+  Semantic type     : categorical
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13304
+  Missing           : 16
+  Missing %         : 0.12
+  Missing severity  : low
+  Unique values     : 31
+  Anomalies         : 1
+  Cleaning actions  : 3
+
+Column: society
+  Physical dtype    : object
+  Semantic type     : string
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 7818
+  Missing           : 5502
+  Missing %         : 41.31
+  Missing severity  : high
+  Unique values     : 2688
+  Anomalies         : 1
+  Cleaning actions  : 3
+
+Column: total_sqft
+  Physical dtype    : object
+  Semantic type     : numeric_string
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13320
+  Missing           : 0
+  Missing %         : 0.0
+  Missing severity  : none
+  Unique values     : 2117
+  Anomalies         : 1
+  Cleaning actions  : 3
+
+Column: bath
+  Physical dtype    : float64
+  Semantic type     : numeric
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13247
+  Missing           : 73
+  Missing %         : 0.55
+  Missing severity  : low
+  Unique values     : 19
+  Anomalies         : 2
+  Cleaning actions  : 3
+
+Column: balcony
+  Physical dtype    : float64
+  Semantic type     : numeric
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 12711
+  Missing           : 609
+  Missing %         : 4.57
+  Missing severity  : moderate
+  Unique values     : 4
+  Anomalies         : 1
+  Cleaning actions  : 3
+
+Column: price
+  Physical dtype    : float64
+  Semantic type     : numeric
+  Confidence        : 1.0
+  Rows              : 13320
+  Non-null          : 13320
+  Missing           : 0
+  Missing %         : 0.0
+  Missing severity  : none
+  Unique values     : 1994
+  Anomalies         : 1
+  Cleaning actions  : 3
+
+3. DETAILED COLUMN ANALYSIS
+----------------------------------------------------------------------------------------------------
+
+====================================================================================================
+COLUMN: area_type
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+## 1. Column Overview
+- **Column name:** `area_type`  
+- **Row count:** 13 320  
+- **Non‑null count:** 13 320  
+- **Missing count:** 0  
+- **Missing percentage:** 0.0 %  
+- **Unique values:** 4  
+
+The column contains categorical descriptors of the type of area (e.g., “Super built‑up Area”, “Built‑up Area”, etc.).  
+
+---
+
+## 2. Data Type and Semantic Interpretation
+| Attribute | Value |
+|-----------|-------|
+| **Physical dtype** | `object` (string‑like) |
+| **Semantic type** | `categorical` |
+| **Confidence** | 1.0 (full confidence in the inferred types) |
+
+The column is interpreted as a categorical feature, suitable for encoding (e.g., one‑hot, ordinal, target encoding) after any required standardisation.
+
+---
+
+## 3. Completeness and Missingness
+- **Missingness:** The column has **no missing values** (`missing_count = 0`).  
+- **Implication:** Completeness is perfect; no imputation is required.
+
+---
+
+## 4. Cardinality and Uniqueness
+- **Unique count:** 4 distinct categories are present across the 13 320 rows.  
+- **Cardinality:** Low cardinality, which typically simplifies encoding and reduces the risk of high‑dimensional sparse representations.
+
+---
+
+## 5. Detected Data‑Quality Issues
+The supplied metadata lists **no column‑specific anomalies** for `area_type`.
+
+> **Note:** The dataset as a whole contains 529 duplicate rows (dataset‑level anomaly). While this does not directly flag `area_type`, duplicate records can amplify any latent inconsistencies in this column and should be addressed at the dataset level.
+
+---
+
+## 6. Recommended Cleaning Actions
+The metadata proposes three **deferred** cleaning actions for `area_type`:
+
+| Action | Reason |
+|--------|--------|
+| **Defer – replace multiple spaces with a single space** | Prevents hidden whitespace from creating spurious distinct categories. |
+| **Standardize – trim any leading or trailing spaces** | Removes accidental padding that would otherwise be treated as a separate category. |
+| **Standardize – unify category naming (e.g., “Super built‑up Area” format)** | Ensures consistent spelling/capitalisation across the four unique values, avoiding duplicate semantic categories. |
+
+These actions are **recommendations**; they have not yet been applied. Implementing them will improve categorical consistency and downstream model reliability.
+
+---
+
+## 7. Modeling Considerations
+1. **Encoding:**  
+   - Low cardinality → one‑hot encoding is straightforward and unlikely to cause dimensionality issues.  
+   - If the model benefits from ordinal information (e.g., tree‑based models), a manual ordering can be defined after standardisation.
+
+2. **Feature Interaction:**  
+   - The column can be combined with numeric features (as indicated by the “numeric_columns” relationship) for interaction terms or feature crosses, provided the categorical values are clean.
+
+3. **Impact of Duplicates:**  
+   - Duplicate rows may cause the same `area_type` value to be over‑represented, potentially biasing model learning. Address dataset‑level duplicates before training.
+
+4. **Data Validation:**  
+   - After applying the recommended cleaning steps, validate that the unique count remains 4 and that no new categories have been introduced.
+
+---
+
+## 8. Risk Assessment
+| Risk | Description | Likelihood | Impact |
+|------|-------------|------------|--------|
+| **Inconsistent whitespace / formatting** | Untrimmed spaces or multiple spaces could create hidden categories, leading to noisy encodings. | Medium (cleaning actions are pending) | Moderate – may degrade model performance. |
+| **Duplicate rows** (dataset‑level) | 529 duplicate rows could inflate the frequency of certain `area_type` values, biasing model predictions. | High (already identified) | High – should be resolved at the dataset level. |
+| **Mis‑encoding of categorical values** | Incorrect handling of the four categories (e.g., treating them as ordinal when they are nominal) could mislead certain algorithms. | Low (clear semantic type) | Low to Moderate – depends on algorithm choice. |
+
+Overall, the column itself is complete and low‑cardinality, but the primary risk stems from formatting inconsistencies and the broader duplicate‑row issue.
+
+---
+
+## 9. Final Column Verdict
+- **Readiness:** The `area_type` column is **complete** and **well‑typed** (categorical, low cardinality).  
+- **Data‑quality status:** No column‑specific anomalies are reported, but recommended standardisation steps are pending.  
+- **Action needed:** Apply the three cleaning actions to ensure consistent category naming and whitespace handling before encoding.  
+- **Overall assessment:** The column is **ready for feature engineering** once the recommended cleaning actions are executed and dataset‑level duplicate rows are addressed.
+
+====================================================================================================
+COLUMN: availability
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+**Column:** `availability`  
+
+---  
+
+## 1. Column Overview
+- **Row count:** 13 320  
+- **Non‑null count:** 13 320  
+- **Missing count:** 0  
+- **Missing percentage:** 0.0 %  
+- **Unique values:** 81  
+
+The column contains **no missing values**; it is therefore complete.
+
+---
+
+## 2. Data Type and Semantic Interpretation
+| Attribute | Value |
+|-----------|-------|
+| **Physical dtype** | `object` (string) |
+| **Semantic type** | `categorical` (as indicated by the profile) |
+
+The profile also notes that the column mixes two distinct concepts:
+
+1. **Availability status** (e.g., “Ready To Move”)  
+2. **Date strings** (e.g., “18‑Dec”)  
+
+Thus, while the physical type is a generic object, the semantic meaning is a *compound* categorical field that actually encodes both a status and a date.
+
+---
+
+## 3. Completeness and Missingness
+- **Missingness:** The column has **0 missing entries** (0 % missing).  
+- **Missing severity:** `none` (as reported).  
+
+Because there are no nulls, completeness is not a concern for this column.
+
+---
+
+## 4. Cardinality and Uniqueness
+- **Unique count:** 81 distinct values across 13 320 rows.  
+- This indicates a moderate level of cardinality for a categorical field, but the presence of mixed concepts (status + date) suggests that many of those unique strings are likely different dates rather than distinct status categories.
+
+---
+
+## 5. Detected Data‑Quality Issues
+The supplied metadata lists **no column‑specific anomalies**.
+
+> **Note:** “No column‑specific anomaly was detected in the supplied data‑quality metadata.”
+
+The only dataset‑level issue reported is a high‑severity duplicate‑row problem (529 duplicate rows). While this is not tied to the `availability` column alone, duplicated rows can propagate any existing inconsistencies in this column throughout the dataset.
+
+---
+
+## 6. Recommended Cleaning Actions
+The metadata proposes the following **recommended** actions (they have not yet been executed):
+
+| Action | Reason |
+|--------|--------|
+| **Decompose** (first) | The column mixes availability status with date strings; split into two independent columns: `availability_status` and `availability_date`. |
+| **Decompose** (second) | Reinforces the need to split into status and date columns. |
+| **Convert_type** | After splitting, standardize the date strings to full ISO‑8601 format and cast the new `availability_date` column to a proper datetime type. |
+| **Validate** | Validate the values in the new `availability_status` column against an allowed list (e.g., “Ready To Move”, etc.). |
+
+These actions address the conceptual mixing identified in the profile and will produce clean, type‑appropriate features for downstream use.
+
+---
+
+## 7. Modeling Considerations
+1. **Feature Engineering**  
+   - **Status column:** After decomposition, treat `availability_status` as a categorical feature. Encode it using one‑hot encoding, target encoding, or ordinal encoding depending on the model and business logic.  
+   - **Date column:** After conversion to a datetime type, derive useful temporal features (e.g., year, month, day‑of‑week, days‑until‑availability) that can be fed to models that handle numeric inputs.
+
+2. **Avoiding Leakage**  
+   - Ensure that any derived date features are created **after** the train‑test split to prevent leakage of future information.
+
+3. **Impact of Duplicates**  
+   - The dataset‑level duplicate rows may cause over‑representation of certain status/date combinations, potentially biasing model learning. Deduplication should be considered before model training.
+
+4. **Cardinality Management**  
+   - With 81 unique raw strings, after splitting the status part is likely to have far fewer categories, simplifying encoding. The date part will be high‑cardinality but will be transformed into numeric temporal features, mitigating the curse of dimensionality.
+
+---
+
+## 8. Risk Assessment
+| Risk | Description | Mitigation |
+|------|-------------|------------|
+| **Conceptual mixing** | A single column encodes two unrelated concepts, which can confuse downstream analytics and models. | Follow the recommended decomposition and type conversion actions. |
+| **Invalid status values** | Without validation, unexpected or misspelled status strings could appear. | Apply the validation step against a curated allowed list. |
+| **Date parsing errors** | Date strings like “18‑Dec” may be ambiguous or inconsistent. | Standardize to ISO format and handle parsing exceptions during conversion. |
+| **Duplicate rows** | Dataset‑level duplicates may inflate the influence of certain availability records. | Perform deduplication at the dataset level before feature engineering. |
+| **High cardinality of raw values** | 81 unique raw strings may hide many distinct dates, leading to sparse categorical encoding if not split. | Split into status and date, then engineer numeric date features. |
+
+Overall, the primary risk stems from the mixed‑concept column rather than missingness or null values.
+
+---
+
+## 9. Final Column Verdict
+**Status:** *Not ready for modeling*  
+
+**Rationale:**  
+- The column currently conflates two independent concepts (status and date), violating the principle of one‑concept‑per‑column.  
+- Although it is complete (no missing values) and has no column‑specific anomalies, the recommended decomposition, type conversion, and validation steps are required to make the data usable for reliable feature engineering and modeling.  
+
+**Next steps:** Implement the cleaning actions in the order listed, address dataset‑level duplicate rows, and then re‑evaluate the column’s readiness.
+
+====================================================================================================
+COLUMN: location
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+## 1. Column Overview
+- **Column name:** `location`  
+- **Row count:** 13,320  
+- **Non‑null count:** 13,319  
+- **Missing count:** 1  
+- **Missing percentage:** 0.01 % (severity = low)  
+- **Unique count:** 1,305  
+
+## 2. Data Type and Semantic Interpretation
+- **Physical dtype:** `object` (Python/Pandas string container)  
+- **Semantic type:** `string` – the column stores free‑form textual location identifiers (e.g., city, address, region).  
+
+## 3. Completeness and Missingness
+The column contains a single missing value (1 / 13,320 rows, 0.01 %).  
+- The missingness severity is reported as **low**, indicating that the overall impact on downstream processes is likely limited.  
+- However, the anomaly metadata flags **missing values** with a **medium** severity, suggesting that the presence of any missing entry should be addressed before model training or reporting.
+
+## 4. Cardinality and Uniqueness
+- **Unique values:** 1,305 distinct location strings across 13,319 populated rows.  
+- This yields a high cardinality relative to the row count, which is typical for location data that can contain many granular entries (e.g., street‑level addresses). No further distribution details are provided.
+
+## 5. Detected Data‑Quality Issues
+| Scope | Anomaly Type | Description | Severity |
+|------|--------------|-------------|----------|
+| **location** | `missing_values` | Missing values detected in this column. | **medium** |
+| **dataset** (not column‑specific) | `duplicate_rows` | 529 duplicate rows detected in the overall dataset. | **high** |
+
+> **Note:** No other column‑specific anomalies are listed in the supplied metadata.
+
+## 6. Recommended Cleaning Actions
+| Action | Reason | Status |
+|--------|--------|--------|
+| **Standardize** – trim leading and trailing whitespace | Removes invisible characters that can cause false uniqueness or mismatches. | *Recommended* |
+| **Defer** – replace multiple consecutive spaces with a single space | Improves consistency of textual representation. | *Recommended* |
+| **Defer** – impute or remove the single missing value | Handles the medium‑severity missing‑value anomaly. Options include: <br>• Imputation with a placeholder (e.g., `"UNKNOWN"`). <br>• Context‑aware imputation (e.g., using other columns). <br>• Row removal (negligible impact given only one row). | *Recommended* |
+
+The cleaning plan is a set of **recommendations**; none have been executed yet.
+
+## 7. Modeling Considerations
+- **High cardinality:** `location` may produce a very sparse feature space if one‑hot encoded. Consider alternative encodings such as:  
+  - Frequency or target encoding.  
+  - Embedding techniques (e.g., learned embeddings, hashing trick).  
+- **String nature:** Ensure that any preprocessing (trimming, space normalization) is applied consistently before feature engineering.  
+- **Missing value handling:** The single missing entry must be resolved; otherwise, many ML libraries will raise an error or drop the row automatically.  
+- **Duplicate rows:** Although not a column‑specific issue, the presence of 529 duplicate rows in the dataset could inflate the apparent importance of certain location values. Deduplication should be performed at the dataset level before model training.
+
+## 8. Risk Assessment
+| Issue | Likelihood | Impact | Overall Risk |
+|-------|------------|--------|--------------|
+| Single missing value | Low (1 occurrence) | Medium (may cause pipeline failure if not handled) | **Medium** |
+| Inconsistent whitespace | Medium (possible, given recommended action) | Low‑Medium (affects uniqueness, downstream joins) | **Low‑Medium** |
+| High cardinality leading to sparse representation | High (1305 unique values) | Medium‑High (model over‑fitting, memory usage) | **High** |
+| Dataset‑level duplicate rows | High (529 duplicates) | High (biases model, inflates metrics) | **High** (but not column‑specific) |
+
+## 9. Final Column Verdict
+The `location` column is **largely complete** (99.99 % non‑null) but exhibits **medium‑severity missing‑value anomaly** and **high cardinality** that can affect modeling. The recommended actions—trimming whitespace, normalizing internal spaces, and addressing the single missing entry—should be applied before feature engineering. After cleaning, careful encoding strategies are required to mitigate sparsity and prevent over‑fitting.  
+
+**Overall assessment:** *Conditionally usable after targeted cleaning and appropriate feature transformation.*
+
+====================================================================================================
+COLUMN: size
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+**Data‑Quality Report – Column `size`**
+
+---
+
+## 1. Column Overview
+- **Column name:** `size`  
+- **Row count (total records):** 13 320  
+- **Non‑null count:** 13 304  
+- **Missing count:** 16  
+- **Missing percentage:** 0.12 %  
+- **Unique value count:** 31  
+
+The column is present in a dataset with 9 columns and 119 880 cells overall.
+
+---
+
+## 2. Data Type and Semantic Interpretation
+| Aspect | Value |
+|--------|-------|
+| **Physical dtype** | `object` (string‑like) |
+| **Semantic type** | `categorical` |
+| **Confidence in type assignment** | 1.0 (full confidence) |
+
+The values are interpreted as categorical labels (e.g., different size categories such as “1 BHK”, “2 Bedroom”, etc.), not as numeric measurements.
+
+---
+
+## 3. Completeness and Missingness
+- **Missing‑value anomaly:** The metadata flags a *medium‑severity* anomaly for missing values in this column.  
+- **Observed missingness:** 16 rows (0.12 %) contain null/empty entries.  
+- **Severity rating:** “low” for the missing‑percentage metric, but the anomaly severity is reported as “medium”.  
+
+Because missing values exist, the column is **not completely complete**. The proportion is small, yet it should be addressed before modeling.
+
+---
+
+## 4. Cardinality and Uniqueness
+- **Unique categories:** 31 distinct labels are observed across the 13 304 non‑null entries.  
+- This indicates moderate cardinality for a categorical feature—enough variety to potentially carry predictive signal, but not so high as to cause sparsity issues after encoding.
+
+---
+
+## 5. Detected Data‑Quality Issues
+| Issue | Description | Severity |
+|-------|-------------|----------|
+| Missing values | 16 null entries detected. | Medium (as per anomaly metadata) |
+| No other column‑specific anomalies are listed. | – | – |
+
+*Note:* The dataset‑level metadata also reports 529 duplicate rows (high severity), but this is a **dataset‑wide** issue, not a column‑specific problem for `size`.
+
+---
+
+## 6. Recommended Cleaning Actions
+The supplied cleaning plan proposes three actions for `size`:
+
+| Action | Reason |
+|--------|--------|
+| **Defer – impute or flag missing values** | Choose an imputation strategy (e.g., replace with the mode, or create a special “Missing” category) before downstream use. |
+| **Convert type – standardize category labels** | Align all labels to a consistent naming convention (e.g., unify “BHK”, “Bedroom”, “BR” into a single format) to avoid duplicate categories that differ only by spelling/casing. |
+| **Defer – encode the cleaned categorical variable** | After cleaning, apply an appropriate encoding method (one‑hot, ordinal, target encoding, etc.) for model consumption. |
+
+These actions are recommendations; they have not yet been executed.
+
+---
+
+## 7. Modeling Considerations
+1. **Encoding Strategy** – Because `size` is categorical with 31 distinct values, one‑hot encoding will add 31 binary features. If the model is sensitive to dimensionality, consider ordinal or target encoding after confirming that an inherent order exists (e.g., “1 BHK” < “2 BHK”).  
+2. **Missing‑value handling** – Imputation (mode or separate “Missing” category) should be performed consistently with the chosen encoding to avoid introducing NaNs into the feature matrix.  
+3. **Label consistency** – Ensure that any standardization of category names occurs before encoding; otherwise, the same logical size could be split across multiple encoded columns, diluting signal.  
+4. **Interaction with numeric columns** – The metadata notes the presence of multiple numeric columns. After encoding, `size` can be combined with those numeric features for joint modeling (e.g., interaction terms).  
+
+---
+
+## 8. Risk Assessment
+| Risk | Impact | Likelihood | Mitigation |
+|------|--------|------------|------------|
+| **Unaddressed missing values** | Model may encounter NaNs, causing training failures or biased predictions. | Medium (16 rows) | Apply the recommended imputation or flagging step. |
+| **Inconsistent category labels** | Duplicate categories inflate cardinality, reduce model interpretability, and may cause sparse encodings. | Medium | Perform the “convert_type” standardization before encoding. |
+| **Improper encoding choice** | Excessive dimensionality (one‑hot) could lead to overfitting; ordinal encoding without true order could mislead the model. | Medium | Evaluate encoding options based on model type and downstream validation. |
+| **Dataset‑level duplicate rows** | May cause duplicated information, affecting model performance and evaluation metrics. | High (dataset‑wide) | Address duplicate rows at the dataset level before model training. |
+
+Overall, the column’s data‑quality risk is moderate, driven primarily by missing values and potential label inconsistency.
+
+---
+
+## 9. Final Column Verdict
+- **Readiness:** The column is **not ready** for direct use in modeling due to identified missing values and inconsistent categorical labeling.  
+- **Action Required:** Follow the recommended cleaning actions (impute/flag missing entries, standardize labels, then encode) before incorporating `size` into any machine‑learning pipeline.  
+
+Once these steps are completed, `size` should become a reliable categorical feature for downstream analytics and predictive modeling.
+
+====================================================================================================
+COLUMN: society
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+**Data‑Quality Report – Column `society`**
+
+---
+
+### 1. Column Overview
+| Item | Value |
+|------|-------|
+| **Column name** | `society` |
+| **Row count (total records)** | 13,320 |
+| **Non‑null (present) values** | 7,818 |
+| **Missing values** | 5,502 |
+| **Missing percentage** | 41.31 % |
+| **Unique values** | 2,688 |
+| **Physical data type** | `object` (string) |
+| **Semantic type** | `string` |
+| **Confidence in profiling** | 1.0 (full confidence) |
+
+The column stores textual identifiers (e.g., society names). Over 40 % of the rows are missing, and the column exhibits relatively high cardinality (2,688 distinct strings).
+
+---
+
+### 2. Data Type and Semantic Interpretation
+- **Physical dtype**: `object` – the underlying storage is a generic Python/Pandas object, appropriate for free‑form text.
+- **Semantic type**: `string` – the values represent categorical labels (names of societies, clubs, organizations, etc.). No numeric semantics are implied.
+
+---
+
+### 3. Completeness and Missingness
+- **Missingness severity**: *high* (as reported) with a *medium* anomaly severity.
+- **Impact**: 5,502 rows (41.31 %) lack a society value, which can reduce the effective training set size if the column is required for modeling, and may bias any analysis that depends on society affiliation.
+- **Current status**: The column is **not complete**; missing values must be addressed before reliable downstream use.
+
+---
+
+### 4. Cardinality and Uniqueness
+- **Unique count**: 2,688 distinct strings among the 7,818 non‑null entries.
+- **Interpretation**: The column has high cardinality relative to the dataset size, suggesting many low‑frequency society names. This may affect encoding strategies (e.g., one‑hot vs. target encoding) and could increase dimensionality if naïvely one‑hot encoded.
+
+---
+
+### 5. Detected Data‑Quality Issues
+| Issue | Description | Severity |
+|-------|-------------|----------|
+| Missing values | 5,502 null entries detected. | Medium (as per anomaly metadata) |
+| No other column‑specific anomalies are listed in the supplied metadata. | – | – |
+
+*Note*: The dataset‑level metadata also reports duplicate rows (529 duplicates) but this is a **dataset‑wide** issue, not a column‑specific anomaly for `society`.
+
+---
+
+### 6. Recommended Cleaning Actions
+| Action | Reason |
+|--------|--------|
+| **Defer** – impute or drop rows with missing values | Because missingness is high, a decision must be made whether to fill (e.g., with a placeholder, most frequent society, or model‑based imputation) or to remove the affected rows. |
+| **Standardize** – normalize whitespace (collapse multiple spaces, trim) | Textual inconsistencies such as extra spaces can cause the same society to appear as multiple distinct categories. |
+| **Review** – examine low‑frequency society names and consider grouping | With many unique values, some societies may appear only a few times. Grouping rare categories (e.g., into “Other”) can reduce dimensionality and improve model stability. |
+
+These actions are **recommendations**; they have not yet been executed.
+
+---
+
+### 7. Modeling Considerations
+1. **Handling missing values**  
+   - *Imputation*: Use a dedicated “unknown” category or apply predictive imputation if the column is predictive.  
+   - *Dropping*: If the column is not essential, rows with missing `society` could be removed, acknowledging the loss of ~41 % of data.
+
+2. **Encoding high‑cardinality categorical data**  
+   - *Target/mean encoding* or *frequency encoding* may be preferable to one‑hot encoding to avoid exploding the feature space.  
+   - *Grouping*: After the “review” step, rare societies can be collapsed into a generic bucket.
+
+3. **Potential leakage from duplicate rows**  
+   - Since duplicate rows exist at the dataset level, ensure that any split into train/validation/test does not place duplicated records across folds, which could artificially inflate performance.
+
+4. **Feature importance**  
+   - Verify whether `society` contributes predictive signal after cleaning; high cardinality may dilute importance unless encoded thoughtfully.
+
+---
+
+### 8. Risk Assessment
+| Risk | Description | Mitigation |
+|------|-------------|------------|
+| **Information loss** due to dropping rows with missing `society` | Could reduce training data size dramatically (≈41 %). | Consider imputation or a dedicated “missing” category. |
+| **Dimensionality explosion** if one‑hot encoded directly | May lead to over‑fitting and increased computational cost. | Apply grouping, target/frequency encoding, or hashing tricks. |
+| **Inconsistent labeling** from whitespace or case variations | Causes artificial uniqueness, harming model generalization. | Apply the recommended standardization step before encoding. |
+| **Bias** if missingness is not random (e.g., certain groups systematically lack society data) | Model may learn spurious patterns. | Investigate missingness patterns (e.g., cross‑tabulate with other columns) before deciding on imputation strategy. |
+
+---
+
+### 9. Final Column Verdict
+The `society` column exhibits **high missingness (41.31 %)** and **high cardinality (2,688 unique values)**. These characteristics pose notable challenges for both data cleaning and model building. Until the recommended actions—particularly missing‑value handling, whitespace standardization, and low‑frequency grouping—are applied, the column should be treated as **not ready for direct use in modeling**. After remediation, reassess its predictive value and encoding strategy before inclusion in the final feature set.
+
+====================================================================================================
+COLUMN: total_sqft
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+## 1. Column Overview
+- **Column name:** `total_sqft`  
+- **Row count:** 13,320  
+- **Non‑null count:** 13,320  
+- **Missing count:** 0  
+- **Missing percentage:** 0.0 %  
+- **Unique count:** 2,117  
+
+The column contains no missing values, so it is **complete**.
+
+---
+
+## 2. Data Type and Semantic Interpretation
+- **Physical dtype:** `object` (string‑based)  
+- **Semantic type:** `numeric_string` – the values are intended to represent numeric square‑footage measurements but are stored as strings.  
+
+The mismatch between physical and semantic types explains why validation rules flagged the column.
+
+---
+
+## 3. Completeness and Missingness
+- **Missingness:** The metadata reports *zero* missing entries and a missing severity of “none”.  
+- **Implication:** No imputation is required for this column; the focus should be on value correctness rather than filling gaps.
+
+---
+
+## 4. Cardinality and Uniqueness
+- **Unique values:** 2,117 distinct entries out of 13,320 rows.  
+- This indicates a moderate level of cardinality: many rows share the same square‑footage value, but there is also a substantial variety of distinct measurements.
+
+---
+
+## 5. Detected Data‑Quality Issues
+| Scope | Anomaly Type | Description | Severity |
+|------|--------------|-------------|----------|
+| `total_sqft` | **invalid_values** | Values failed deterministic validation or normalization checks (e.g., non‑numeric characters, ranges, units). | **high** |
+
+No other column‑specific anomalies are listed. The dataset‑level anomaly about duplicate rows is noted, but it is not specific to `total_sqft`.
+
+---
+
+## 6. Recommended Cleaning Actions
+| Action | Reason |
+|--------|--------|
+| **standardize** | Extract the numeric part of each entry and handle range formats (e.g., replace `"2100 - 2850"` with a single numeric representation such as the midpoint or bounds). |
+| **convert_type** | Remove any non‑numeric characters or units (e.g., `"Sq. Meter"`) and cast the column from `object` to a numeric dtype (e.g., `float`). |
+| **investigate** | Review entries with ambiguous or complex formats to decide on a consistent representation before applying the standardization rule. |
+
+These actions are **recommendations**; they have not yet been executed.
+
+---
+
+## 7. Modeling Considerations
+1. **Feature Type:** After cleaning, `total_sqft` will become a continuous numeric feature suitable for regression, tree‑based models, or scaling pipelines.  
+2. **Pre‑processing:**  
+   - Apply the **standardize** step first to ensure every record contains a single numeric value.  
+   - Follow with **convert_type** so downstream models receive a proper numeric dtype.  
+   - Consider creating an additional indicator flag (e.g., `total_sqft_was_range`) if the original data contained many ranges, which could capture uncertainty.  
+3. **Interaction with Other Numeric Columns:** The metadata notes the presence of other numeric columns, enabling correlation analysis *once* `total_sqft` is numeric.  
+
+---
+
+## 8. Risk Assessment
+| Risk | Source | Potential Impact | Mitigation |
+|------|--------|------------------|------------|
+| **Invalid numeric representation** | High‑severity `invalid_values` anomaly | Model may receive erroneous magnitudes, leading to biased predictions or training failures. | Execute the recommended **standardize** and **convert_type** actions; verify a sample of transformed values. |
+| **Ambiguous range handling** | Need to **investigate** ambiguous formats | Inconsistent treatment of ranges could introduce systematic error. | Define a clear rule (e.g., use midpoint) and apply uniformly; document the rule for reproducibility. |
+| **Residual duplicate rows** | Dataset‑level duplicate rows (529) | Duplicate records could overweight certain `total_sqft` values. | De‑duplicate at the dataset level before model training. |
+
+---
+
+## 9. Final Column Verdict
+- **Readiness:** The column is **not ready** for direct use in modeling due to high‑severity invalid value anomalies and mismatched data type.  
+- **Action Required:** Implement the three recommended cleaning actions (standardization, type conversion, and investigation of ambiguous entries) and resolve dataset‑level duplicate rows.  
+- **Post‑cleaning Expectation:** Once cleaned, `total_sqft` will be a reliable numeric feature with full completeness and moderate cardinality, suitable for inclusion in machine‑learning pipelines.
+
+====================================================================================================
+COLUMN: bath
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+## 1. Column Overview
+- **Column name:** `bath`  
+- **Row count:** 13 320  
+- **Non‑null count:** 13 247  
+- **Missing count:** 73  
+- **Missing percentage:** 0.55 %  
+- **Unique values:** 19  
+
+## 2. Data Type and Semantic Interpretation
+- **Physical dtype:** `float64`  
+- **Semantic type:** `numeric` (interpreted as a continuous numeric measurement, e.g., number of bathrooms).
+
+## 3. Completeness and Missingness
+The column contains 73 missing entries, representing **0.55 %** of the total rows.  
+- **Missingness severity:** *low* (as reported in the profile).  
+- **Anomaly:** A *medium‑severity* “missing_values” anomaly is flagged, indicating that the missingness should be addressed before modeling.
+
+## 4. Cardinality and Uniqueness
+- **Unique count:** 19 distinct numeric values across the 13 320 rows.  
+  This relatively low cardinality suggests the column may be discrete or heavily rounded (e.g., typical bathroom counts such as 1.0, 1.5, 2.0, etc.).
+
+## 5. Detected Data‑Quality Issues
+| Issue | Description (as supplied) | Severity |
+|-------|---------------------------|----------|
+| Missing values | Missing values detected in this column. | Medium |
+| Outliers | Statistical outliers detected using the IQR method. | Medium |
+
+No other column‑specific anomalies are listed in the supplied metadata.
+
+## 6. Recommended Cleaning Actions
+| Action | Reason (as supplied) | Status |
+|--------|----------------------|--------|
+| **Defer – impute missing values using median** | Provides a simple, robust imputation for the 73 missing entries. | Recommended (not yet executed) |
+| **Defer – cap outliers to bounds (0.5‑4.5)** | Limits extreme values identified by the IQR method to a plausible range for bathroom counts. | Recommended (not yet executed) |
+| **Review – consider binning or log‑transform to reduce skew** | May improve model performance if the distribution is highly skewed. | Recommended (requires analyst decision) |
+
+These actions are suggestions; implementation should be validated against downstream model performance and business rules.
+
+## 7. Modeling Considerations
+- **Numeric nature:** `bath` can be used directly as a numeric feature after handling missing values and outliers.
+- **Low cardinality:** With only 19 distinct values, the column may behave similarly to an ordinal categorical variable. Consider:
+  - **Binning** (e.g., 0‑1, 1‑2, 2‑3, >3) to reduce sparsity and capture non‑linear effects.
+  - **Log‑transformation** if the post‑cleaned values remain right‑skewed.
+- **Correlation potential:** The dataset contains multiple other numeric columns, enabling correlation or multivariate feature‑engineering analyses once `bath` is cleaned.
+- **Imputation impact:** Median imputation preserves the central tendency but may reduce variance; assess whether a model‑specific imputer (e.g., KNN, iterative) is more appropriate.
+
+## 8. Risk Assessment
+| Risk | Source | Potential Impact |
+|------|--------|------------------|
+| **Missing data bias** | 73 missing rows (0.55 %) | If missingness is not random, imputation could introduce bias. |
+| **Outlier distortion** | IQR‑detected outliers | Uncapped outliers may skew model coefficients or tree splits. |
+| **Low cardinality misuse** | Only 19 unique values | Treating the column as continuous without transformation may misrepresent its ordinal nature. |
+| **Dataset‑level duplicates** | 529 duplicate rows (dataset anomaly) | Duplicate records could amplify the influence of `bath` values; de‑duplication should be considered at the dataset level. |
+
+Overall, the column is **moderately risky** due to medium‑severity missingness and outlier anomalies, but the low missing percentage keeps the risk manageable after proper cleaning.
+
+## 9. Final Column Verdict
+**Status:** *Not ready for production modeling* until the recommended cleaning actions are applied and the impact on downstream models is validated.
+
+**Next steps:**  
+1. Impute the 73 missing values using the median (or an alternative imputer after exploratory analysis).  
+2. Cap identified outliers to the range 0.5 – 4.5.  
+3. Evaluate the distribution post‑cleaning and decide whether binning or a log‑transform is beneficial.  
+4. Re‑assess the column after cleaning, especially in the context of duplicate rows at the dataset level.
+
+====================================================================================================
+COLUMN: balcony
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+## 1. Column Overview
+- **Column name:** `balcony`  
+- **Row count (total records):** 13,320  
+- **Non‑null count:** 12,711  
+- **Missing count:** 609  
+- **Missing percentage:** 4.57 %  
+- **Unique value count:** 4  
+
+The column is part of a dataset that contains 9 columns and 13,320 rows (119,880 cells total).  
+
+---
+
+## 2. Data Type and Semantic Interpretation
+- **Physical data type:** `float64`  
+- **Semantic type:** `numeric` (confidence = 1.0)  
+
+The column is currently stored as a 64‑bit floating‑point number, and its semantic meaning is identified as numeric (e.g., a measurement, count, or continuous value).
+
+---
+
+## 3. Completeness and Missingness
+- **Missingness severity:** *moderate* (as reported)  
+- **Anomaly detected:** *missing_values* (severity = medium)  
+
+With 609 missing entries (4.57 % of the rows), the column is not fully complete. The missingness is flagged as a medium‑severity anomaly, indicating that it could affect downstream analyses if not addressed.
+
+---
+
+## 4. Cardinality and Uniqueness
+- **Unique count:** 4  
+
+Only four distinct numeric values appear in the column across the 13,320 rows. This low cardinality suggests the column may represent a small set of categories encoded as numbers (e.g., presence/absence, size tiers) rather than a continuous measurement.
+
+---
+
+## 5. Detected Data‑Quality Issues
+| Issue | Scope | Description | Severity |
+|-------|-------|-------------|----------|
+| Missing values | `balcony` | Missing values detected in this column. | medium |
+
+No other column‑specific anomalies are listed in the supplied metadata. (Dataset‑level duplicate rows are noted, but they are not column‑specific.)
+
+---
+
+## 6. Recommended Cleaning Actions
+| Action | Target column | Reason |
+|--------|---------------|--------|
+| **Defer** | `balcony` | Impute missing values using median or mode (to be decided after further analysis). |
+| **Convert type** | `balcony` | Convert column to integer dtype (likely more appropriate given the low cardinality and numeric semantics). |
+| **Defer** | `balcony` | Evaluate column relevance before modeling (determine whether the feature adds predictive value). |
+
+These actions are recommendations; they have not been executed yet.
+
+---
+
+## 7. Modeling Considerations
+1. **Missing value handling** – Before feeding the column into a model, decide on an imputation strategy (e.g., median for a continuous interpretation or mode if the values represent categories).  
+2. **Type conversion** – Changing the dtype from `float64` to an integer type may improve memory efficiency and clarify that the values are discrete.  
+3. **Feature relevance** – Given the very low cardinality (only 4 distinct values), assess whether `balcony` provides sufficient variance to be useful for the target prediction. It may act as a binary or ordinal feature rather than a continuous predictor.  
+4. **Interaction with other numeric columns** – The dataset contains multiple numeric columns, so correlation or business‑rule checks could be performed after the column is cleaned and typed appropriately.  
+
+---
+
+## 8. Risk Assessment
+- **Missingness risk:** Moderate severity; 4.57 % missing values could bias models if the missingness is not random.  
+- **Anomaly risk:** Medium severity due to the identified missing‑value anomaly.  
+- **Cardinality risk:** Low cardinality may limit the feature’s discriminative power, especially if the values are highly imbalanced (balance information not provided).  
+- **Overall column risk:** Until missing values are imputed and relevance is confirmed, the column poses a moderate risk to model quality.
+
+---
+
+## 9. Final Column Verdict
+The `balcony` column is **not ready** for direct use in modeling. It requires:
+
+1. Imputation of the 609 missing entries (using median or mode).  
+2. Conversion from `float64` to an integer dtype to reflect its likely discrete nature.  
+3. An explicit relevance assessment to determine whether the feature should be retained.
+
+Addressing these steps will reduce the medium‑severity missing‑value anomaly and align the column with the dataset’s overall readiness goals.
+
+====================================================================================================
+COLUMN: price
+PROVIDER: groq
+MODEL: openai/gpt-oss-120b
+STATUS: success
+====================================================================================================
+## 1. Column Overview
+- **Column name:** `price`  
+- **Row count:** 13,320  
+- **Non‑null count:** 13,320  
+- **Missing count:** 0  
+- **Missing percentage:** 0.0 %  
+- **Unique values:** 1,994  
+
+The column contains numeric price information for every record in the dataset.
+
+---
+
+## 2. Data Type and Semantic Interpretation
+- **Physical dtype:** `float64` (64‑bit floating‑point)  
+- **Semantic type:** `numeric`  
+
+Given the semantic label, `price` is expected to represent a monetary amount or a continuous measurement of cost.
+
+---
+
+## 3. Completeness and Missingness
+The column has **no missing values** (`missing_count = 0`).  
+> **Observation:** The column is complete; no imputation or missing‑value handling is required.
+
+---
+
+## 4. Cardinality and Uniqueness
+- **Unique count:** 1,994 distinct values out of 13,320 rows.  
+
+This indicates moderate cardinality: many rows share the same price, but there is still a substantial variety of distinct price points.
+
+---
+
+## 5. Detected Data‑Quality Issues
+### Column‑specific anomaly
+| Scope | Anomaly type | Description | Severity |
+|------|--------------|-------------|----------|
+| `price` | outliers | Statistical outliers detected using the IQR method. | medium |
+
+> **Note:** No other column‑specific anomalies are listed in the supplied metadata.
+
+### Dataset‑level observation (for context)
+- Duplicate rows: 529 duplicate rows detected (severity **high**).  
+  While this is a dataset‑level issue, it may indirectly affect the `price` column if duplicated records contain identical price values.
+
+---
+
+## 6. Recommended Cleaning Actions
+| Action | Reason |
+|--------|--------|
+| **investigate** | Examine the records flagged as outliers to understand why they fall outside the typical IQR range. |
+| **defer** | Apply winsorization or clipping at the upper bound of **225** to cap extreme values without removing rows. |
+| **review** | Consider a log transformation of `price` to reduce skewness and improve model stability. |
+
+These actions are recommendations; they have not yet been executed.
+
+---
+
+## 7. Modeling Considerations
+- **Numeric nature:** `price` can be used directly as a continuous feature after addressing outliers and potential skew.
+- **Outlier handling:** Medium‑severity outliers may distort model training (e.g., linear models, distance‑based algorithms). Applying the suggested winsorization or clipping can mitigate this risk.
+- **Skew reduction:** If the distribution is right‑skewed (common for price data), a log transformation may improve linearity and variance homogeneity.
+- **Correlation potential:** The dataset contains multiple other numeric columns, enabling correlation analysis or feature interaction engineering once `price` is cleaned.
+- **Duplicate impact:** High‑severity duplicate rows in the dataset could inflate the importance of certain price values; deduplication should be considered at the dataset level before model training.
+
+---
+
+## 8. Risk Assessment
+| Issue | Severity | Potential Impact |
+|-------|----------|------------------|
+| Outliers (column‑specific) | Medium | May bias model coefficients, inflate error metrics, and cause unstable predictions. |
+| Duplicate rows (dataset‑level) | High | Could lead to over‑representation of certain price points, affecting model generalization. |
+| No missing data | None | No risk from missingness. |
+
+Overall, the primary risk for the `price` column stems from the identified outliers and the broader duplicate‑row problem in the dataset.
+
+---
+
+## 9. Final Column Verdict
+**Status:** *Requires cleaning before reliable use in modeling.*
+
+- The column is complete and correctly typed, but the presence of medium‑severity outliers warrants investigation and mitigation (winsorization/clipping, possible log transformation).  
+- Addressing these issues will reduce the risk of biased or unstable model performance.  
+
+Proceed with the recommended cleaning actions and re‑evaluate the column’s quality after they are applied.
+
+====================================================================================================
+END OF DATA QUALITY REPORT
+====================================================================================================
