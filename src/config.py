@@ -42,3 +42,4 @@ def get_settings() -> Settings:
 
 
 config = get_settings()
+BASE_DIR = config.paths.base_dir

@@ -19,6 +19,7 @@ Requires-Dist: fastapi
 Requires-Dist: uvicorn
 Requires-Dist: xgboost
 Requires-Dist: seaborn
+Requires-Dist: Pillow
 Requires-Dist: streamlit
 Requires-Dist: docker
 Requires-Dist: statsmodels

@@ -13,6 +13,7 @@ fastapi
 uvicorn
 xgboost
 seaborn
+Pillow
 streamlit
 docker
 statsmodels
