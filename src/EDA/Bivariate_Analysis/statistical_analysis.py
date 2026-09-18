@@ -16,6 +16,9 @@ from src.EDA.Bivariate_Analysis.common import (
     pair_metadata,
 )
 
+# Maximum unique values allowed for categorical bivariate analysis to prevent MemoryError
+MAX_CATEGORICAL_CARDINALITY = 200
+
 
 def safe_float(value: Any) -> float | None:
     """Convert a value to a JSON-safe float."""
@@ -109,6 +112,13 @@ def analyze_numeric_categorical(
     numeric: pd.Series, categorical: pd.Series
 ) -> dict[str, Any]:
     """Analyze relationships between a numeric and a categorical series."""
+    if categorical.nunique() > MAX_CATEGORICAL_CARDINALITY:
+        return {
+            "pair_type": "numeric_categorical",
+            "sample_size": int(len(numeric.dropna())),
+            "error": f"Skipped: Categorical column exceeds max cardinality threshold ({MAX_CATEGORICAL_CARDINALITY})."
+        }
+
     data = pd.DataFrame(
         {
             "numeric": pd.to_numeric(numeric, errors="coerce"),
@@ -204,6 +214,13 @@ def analyze_categorical_categorical(
     x: pd.Series, y: pd.Series
 ) -> dict[str, Any]:
     """Analyze relationships between two categorical series."""
+    if x.nunique() > MAX_CATEGORICAL_CARDINALITY or y.nunique() > MAX_CATEGORICAL_CARDINALITY:
+        return {
+            "pair_type": "categorical_categorical",
+            "sample_size": int(len(x.dropna())),
+            "error": f"Skipped: One or both categorical columns exceed max cardinality threshold ({MAX_CATEGORICAL_CARDINALITY})."
+        }
+
     data = pd.DataFrame({"x": x, "y": y}).dropna()
     result = {"pair_type": "categorical_categorical", "sample_size": int(len(data))}
     if len(data) == 0:
@@ -309,6 +326,13 @@ def analyze_datetime_categorical(
     datetime_series: pd.Series, categorical_series: pd.Series
 ) -> dict[str, Any]:
     """Analyze frequencies of a categorical series over a datetime series."""
+    if categorical_series.nunique() > MAX_CATEGORICAL_CARDINALITY:
+        return {
+            "pair_type": "datetime_categorical",
+            "sample_size": int(len(datetime_series.dropna())),
+            "error": f"Skipped: Categorical column exceeds max cardinality threshold ({MAX_CATEGORICAL_CARDINALITY})."
+        }
+
     data = pd.DataFrame(
         {
             "date": pd.to_datetime(datetime_series, errors="coerce"),
@@ -413,16 +437,24 @@ def analyze_dataframe(df: pd.DataFrame) -> dict[str, Any]:
     return result
 
 
-def save_analysis(
-    analysis: dict[str, Any], filename: Path = BASE_DIR / "src" /"EDA" / "Bivariate_Analysis" / "Reports" / "bivariate_statistics.json"
-) -> None:
+def save_analysis(analysis: dict[str, Any], filename: Path) -> None:
     """Save the analysis dictionary to a JSON file."""
+    filename.parent.mkdir(parents=True, exist_ok=True)
     with open(filename, "w", encoding="utf-8") as f:
         json.dump(analysis, f, indent=2, ensure_ascii=False)
 
 
-if __name__ == "__main__":
-    df = pd.read_csv("data.csv")
+# ==========================================
+# IMPLEMENTATION 
+# ==========================================
+
+def perform_bivariate_statistical_analysis(file_path: Path) -> dict[str, Any]:
+    """Perform bivariate statistical analysis on the DataFrame."""
+    df = pd.read_csv(file_path)
     analysis = analyze_dataframe(df)
-    save_analysis(analysis)
+    save_analysis(analysis, filename=BASE_DIR / "src" / "EDA" / "Bivariate_Analysis" / "Reports" / "bivariate_statistics.json")
     print(json.dumps(analysis, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    perform_bivariate_statistical_analysis(file_path=BASE_DIR / "src" / "Data" / "ecommerce_sales.csv")

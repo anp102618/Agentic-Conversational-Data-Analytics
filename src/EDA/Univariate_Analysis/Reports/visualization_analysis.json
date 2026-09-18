@@ -1,0 +1,917 @@
+{
+  "dataset": {
+    "rows": 138116,
+    "columns": 46
+  },
+  "variables": {
+    "order_id": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "order_id_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "order_id"
+        }
+      ]
+    },
+    "order_date": {
+      "type": "datetime",
+      "visualizations": [
+        {
+          "id": "order_date_timeline",
+          "type": "line",
+          "purpose": "time_distribution",
+          "x": "order_date"
+        },
+        {
+          "id": "order_date_year",
+          "type": "bar",
+          "purpose": "year_frequency",
+          "x": "order_date",
+          "time_unit": "year"
+        },
+        {
+          "id": "order_date_month",
+          "type": "bar",
+          "purpose": "month_frequency",
+          "x": "order_date",
+          "time_unit": "month"
+        },
+        {
+          "id": "order_date_weekday",
+          "type": "bar",
+          "purpose": "weekday_frequency",
+          "x": "order_date",
+          "time_unit": "day_of_week"
+        }
+      ]
+    },
+    "order_time": {
+      "type": "datetime",
+      "visualizations": [
+        {
+          "id": "order_time_timeline",
+          "type": "line",
+          "purpose": "time_distribution",
+          "x": "order_time"
+        },
+        {
+          "id": "order_time_year",
+          "type": "bar",
+          "purpose": "year_frequency",
+          "x": "order_time",
+          "time_unit": "year"
+        },
+        {
+          "id": "order_time_month",
+          "type": "bar",
+          "purpose": "month_frequency",
+          "x": "order_time",
+          "time_unit": "month"
+        },
+        {
+          "id": "order_time_weekday",
+          "type": "bar",
+          "purpose": "weekday_frequency",
+          "x": "order_time",
+          "time_unit": "day_of_week"
+        }
+      ]
+    },
+    "order_status": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "order_status_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "order_status"
+        }
+      ]
+    },
+    "sales_channel": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "sales_channel_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "sales_channel"
+        }
+      ]
+    },
+    "customer_id": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_id_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_id"
+        }
+      ]
+    },
+    "customer_name": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_name_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_name"
+        }
+      ]
+    },
+    "customer_age": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "customer_age_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "customer_age",
+          "bins": 30
+        },
+        {
+          "id": "customer_age_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "customer_age"
+        },
+        {
+          "id": "customer_age_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "customer_age"
+        },
+        {
+          "id": "customer_age_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "customer_age"
+        }
+      ]
+    },
+    "gender": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "gender_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "gender"
+        }
+      ]
+    },
+    "customer_segment": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_segment_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_segment"
+        }
+      ]
+    },
+    "customer_type": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_type_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_type"
+        }
+      ]
+    },
+    "customer_city": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_city_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_city"
+        }
+      ]
+    },
+    "customer_state": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_state_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_state"
+        }
+      ]
+    },
+    "customer_country": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_country_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_country"
+        }
+      ]
+    },
+    "region": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "region_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "region"
+        }
+      ]
+    },
+    "customer_postal_code": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "customer_postal_code_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "customer_postal_code",
+          "bins": 30
+        },
+        {
+          "id": "customer_postal_code_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "customer_postal_code"
+        },
+        {
+          "id": "customer_postal_code_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "customer_postal_code"
+        },
+        {
+          "id": "customer_postal_code_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "customer_postal_code"
+        }
+      ]
+    },
+    "payment_method": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "payment_method_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "payment_method"
+        }
+      ]
+    },
+    "payment_status": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "payment_status_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "payment_status"
+        }
+      ]
+    },
+    "currency": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "currency_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "currency"
+        }
+      ]
+    },
+    "shipping_method": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "shipping_method_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "shipping_method"
+        }
+      ]
+    },
+    "warehouse": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "warehouse_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "warehouse"
+        }
+      ]
+    },
+    "delivery_days": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "delivery_days_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "delivery_days",
+          "bins": 30
+        },
+        {
+          "id": "delivery_days_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "delivery_days"
+        },
+        {
+          "id": "delivery_days_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "delivery_days"
+        },
+        {
+          "id": "delivery_days_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "delivery_days"
+        }
+      ]
+    },
+    "estimated_delivery_days": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "estimated_delivery_days_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "estimated_delivery_days",
+          "bins": 30
+        },
+        {
+          "id": "estimated_delivery_days_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "estimated_delivery_days"
+        },
+        {
+          "id": "estimated_delivery_days_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "estimated_delivery_days"
+        },
+        {
+          "id": "estimated_delivery_days_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "estimated_delivery_days"
+        }
+      ]
+    },
+    "delivery_status": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "delivery_status_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "delivery_status"
+        }
+      ]
+    },
+    "return_status": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "return_status_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "return_status"
+        }
+      ]
+    },
+    "return_reason": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "return_reason_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "return_reason"
+        }
+      ]
+    },
+    "customer_rating": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "customer_rating_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "customer_rating",
+          "bins": 30
+        },
+        {
+          "id": "customer_rating_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "customer_rating"
+        },
+        {
+          "id": "customer_rating_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "customer_rating"
+        },
+        {
+          "id": "customer_rating_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "customer_rating"
+        }
+      ]
+    },
+    "review_sentiment": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "review_sentiment_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "review_sentiment"
+        }
+      ]
+    },
+    "customer_review": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "customer_review_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "customer_review"
+        }
+      ]
+    },
+    "marketing_channel": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "marketing_channel_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "marketing_channel"
+        }
+      ]
+    },
+    "campaign_name": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "campaign_name_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "campaign_name"
+        }
+      ]
+    },
+    "coupon_code": {
+      "type": "categorical",
+      "visualizations": [
+        {
+          "id": "coupon_code_bar",
+          "type": "bar",
+          "purpose": "category_frequency",
+          "x": "coupon_code"
+        }
+      ]
+    },
+    "loyalty_points_earned": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "loyalty_points_earned_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "loyalty_points_earned",
+          "bins": 30
+        },
+        {
+          "id": "loyalty_points_earned_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "loyalty_points_earned"
+        },
+        {
+          "id": "loyalty_points_earned_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "loyalty_points_earned"
+        },
+        {
+          "id": "loyalty_points_earned_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "loyalty_points_earned"
+        }
+      ]
+    },
+    "loyalty_points_redeemed": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "loyalty_points_redeemed_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "loyalty_points_redeemed",
+          "bins": 30
+        },
+        {
+          "id": "loyalty_points_redeemed_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "loyalty_points_redeemed"
+        },
+        {
+          "id": "loyalty_points_redeemed_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "loyalty_points_redeemed"
+        },
+        {
+          "id": "loyalty_points_redeemed_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "loyalty_points_redeemed"
+        }
+      ]
+    },
+    "quantity": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "quantity_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "quantity",
+          "bins": 30
+        },
+        {
+          "id": "quantity_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "quantity"
+        },
+        {
+          "id": "quantity_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "quantity"
+        },
+        {
+          "id": "quantity_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "quantity"
+        }
+      ]
+    },
+    "gross_sales": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "gross_sales_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "gross_sales",
+          "bins": 30
+        },
+        {
+          "id": "gross_sales_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "gross_sales"
+        },
+        {
+          "id": "gross_sales_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "gross_sales"
+        },
+        {
+          "id": "gross_sales_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "gross_sales"
+        }
+      ]
+    },
+    "discount_amount": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "discount_amount_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "discount_amount",
+          "bins": 30
+        },
+        {
+          "id": "discount_amount_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "discount_amount"
+        },
+        {
+          "id": "discount_amount_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "discount_amount"
+        },
+        {
+          "id": "discount_amount_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "discount_amount"
+        }
+      ]
+    },
+    "tax_amount": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "tax_amount_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "tax_amount",
+          "bins": 30
+        },
+        {
+          "id": "tax_amount_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "tax_amount"
+        },
+        {
+          "id": "tax_amount_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "tax_amount"
+        },
+        {
+          "id": "tax_amount_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "tax_amount"
+        }
+      ]
+    },
+    "shipping_cost": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "shipping_cost_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "shipping_cost",
+          "bins": 30
+        },
+        {
+          "id": "shipping_cost_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "shipping_cost"
+        },
+        {
+          "id": "shipping_cost_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "shipping_cost"
+        },
+        {
+          "id": "shipping_cost_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "shipping_cost"
+        }
+      ]
+    },
+    "net_sales": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "net_sales_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "net_sales",
+          "bins": 30
+        },
+        {
+          "id": "net_sales_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "net_sales"
+        },
+        {
+          "id": "net_sales_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "net_sales"
+        },
+        {
+          "id": "net_sales_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "net_sales"
+        }
+      ]
+    },
+    "product_cost": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "product_cost_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "product_cost",
+          "bins": 30
+        },
+        {
+          "id": "product_cost_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "product_cost"
+        },
+        {
+          "id": "product_cost_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "product_cost"
+        },
+        {
+          "id": "product_cost_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "product_cost"
+        }
+      ]
+    },
+    "profit": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "profit_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "profit",
+          "bins": 30
+        },
+        {
+          "id": "profit_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "profit"
+        },
+        {
+          "id": "profit_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "profit"
+        },
+        {
+          "id": "profit_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "profit"
+        }
+      ]
+    },
+    "profit_margin_percentage": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "profit_margin_percentage_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "profit_margin_percentage",
+          "bins": 30
+        },
+        {
+          "id": "profit_margin_percentage_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "profit_margin_percentage"
+        },
+        {
+          "id": "profit_margin_percentage_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "profit_margin_percentage"
+        },
+        {
+          "id": "profit_margin_percentage_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "profit_margin_percentage"
+        }
+      ]
+    },
+    "customer_lifetime_value": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "customer_lifetime_value_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "customer_lifetime_value",
+          "bins": 30
+        },
+        {
+          "id": "customer_lifetime_value_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "customer_lifetime_value"
+        },
+        {
+          "id": "customer_lifetime_value_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "customer_lifetime_value"
+        },
+        {
+          "id": "customer_lifetime_value_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "customer_lifetime_value"
+        }
+      ]
+    },
+    "is_repeat_customer": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "is_repeat_customer_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "is_repeat_customer",
+          "bins": 30
+        },
+        {
+          "id": "is_repeat_customer_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "is_repeat_customer"
+        },
+        {
+          "id": "is_repeat_customer_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "is_repeat_customer"
+        },
+        {
+          "id": "is_repeat_customer_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "is_repeat_customer"
+        }
+      ]
+    },
+    "customer_order_count": {
+      "type": "numeric",
+      "visualizations": [
+        {
+          "id": "customer_order_count_histogram",
+          "type": "histogram",
+          "purpose": "distribution",
+          "x": "customer_order_count",
+          "bins": 30
+        },
+        {
+          "id": "customer_order_count_boxplot",
+          "type": "boxplot",
+          "purpose": "outlier_detection",
+          "x": "customer_order_count"
+        },
+        {
+          "id": "customer_order_count_kde",
+          "type": "kde",
+          "purpose": "distribution_shape",
+          "x": "customer_order_count"
+        },
+        {
+          "id": "customer_order_count_qq",
+          "type": "qq_plot",
+          "purpose": "normality_assessment",
+          "x": "customer_order_count"
+        }
+      ]
+    }
+  }
+}

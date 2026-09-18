@@ -25,3 +25,5 @@ groq
 openai
 streamlit
 redis
+openpyxl
+tabulate

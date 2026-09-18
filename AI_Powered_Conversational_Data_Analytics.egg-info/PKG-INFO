@@ -31,6 +31,8 @@ Requires-Dist: groq
 Requires-Dist: openai
 Requires-Dist: streamlit
 Requires-Dist: redis
+Requires-Dist: openpyxl
+Requires-Dist: tabulate
 Dynamic: author
 Dynamic: requires-dist
 Dynamic: requires-python

@@ -5,7 +5,7 @@ from functools import lru_cache
 
 
 class PathConfig(BaseModel):
-    base_dir: Path = Path(__file__).resolve().parent.parent.parent
+    base_dir: Path = Path(__file__).resolve().parent.parent
     logs: Path = base_dir / "logs"
     data: Path = base_dir / "data"
 

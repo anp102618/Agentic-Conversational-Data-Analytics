@@ -1,0 +1,65 @@
+{
+    "univariate_candidates": {
+        "numeric": [
+            "Age",
+            "Quantity",
+            "Unit_Price",
+            "Discount",
+            "Rating",
+            "Delivery_Days",
+            "Total_Amount"
+        ],
+        "categorical": [
+            "Gender",
+            "City",
+            "Product_Category",
+            "Payment_Method",
+            "Returned"
+        ],
+        "datetime": [
+            "Order_Date"
+        ]
+    },
+    "bivariate_candidates": {
+        "numeric": [
+            "Age",
+            "Quantity",
+            "Unit_Price",
+            "Discount",
+            "Rating",
+            "Delivery_Days",
+            "Total_Amount"
+        ],
+        "categorical": [
+            "Gender",
+            "City",
+            "Product_Category",
+            "Payment_Method",
+            "Returned"
+        ],
+        "datetime": [
+            "Order_Date"
+        ]
+    },
+    "multivariate_candidates": {
+        "numeric": [
+            "Age",
+            "Quantity",
+            "Unit_Price",
+            "Discount",
+            "Rating",
+            "Delivery_Days",
+            "Total_Amount"
+        ],
+        "categorical": [
+            "Gender",
+            "City",
+            "Product_Category",
+            "Payment_Method",
+            "Returned"
+        ],
+        "datetime": [
+            "Order_Date"
+        ]
+    }
+}
